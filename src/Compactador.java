@@ -1,3 +1,4 @@
+import arvore_binaria.BinaryTree;
 import fila_prioridade.FilaPrioridade;
 
 import java.io.BufferedReader;
@@ -71,6 +72,14 @@ public class Compactador {
 			}
 		}
 		filaFrequencia.print();
+
+		// fase 3:
+		BinaryTree bt = new BinaryTree();
+		filaFrequencia.huffmanizer();
+		filaFrequencia.print();
+		bt.root = filaFrequencia.getTree();
+		bt.printPreOrder();
+
 
 
 //        int i = 233;

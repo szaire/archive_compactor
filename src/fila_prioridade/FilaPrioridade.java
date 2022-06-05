@@ -1,5 +1,7 @@
 package fila_prioridade;
 
+import org.w3c.dom.Node;
+
 public class FilaPrioridade {
     // attributes
     private NodeP first;
@@ -23,23 +25,51 @@ public class FilaPrioridade {
         }
         else {
             // Se o novo dado ter prioridade mais alta
-            if (newData.priority >= this.first.priority) {
+            if (newData.priority <= this.first.priority) {
                 newData.next = this.first;
                 this.first = newData;
             }
             // Se o novo dado ter prioridade mais baixa
-            else if (newData.priority < this.last.priority) {
+            else if (newData.priority > this.last.priority) {
                 this.last.next = newData;
                 this.last = newData;
             }
             // Se o novo dado ter prioridade intermediária
             else {
                 NodeP temp = this.first;
-                while (newData.priority < temp.next.priority) {
+                while (newData.priority > temp.next.priority) {
                     temp = temp.next;
                 }
                 newData.next = temp.next;
                 temp.next = newData;
+            }
+        }
+        increasePositionRef();
+    }
+
+    public void enqueue(NodeP newNode) {
+        if (first == null) {
+            this.first = this.last = newNode;
+        }
+        else {
+            // Se o novo dado ter prioridade mais alta
+            if (newNode.priority >= this.first.priority) {
+                newNode.next = this.first;
+                this.first = newNode;
+            }
+            // Se o novo dado ter prioridade mais baixa
+            else if (newNode.priority < this.last.priority) {
+                this.last.next = newNode;
+                this.last = newNode;
+            }
+            // Se o novo dado ter prioridade intermediária
+            else {
+                NodeP temp = this.first;
+                while (newNode.priority < temp.next.priority) {
+                    temp = temp.next;
+                }
+                newNode.next = temp.next;
+                temp.next = newNode;
             }
         }
         increasePositionRef();
@@ -73,24 +103,16 @@ public class FilaPrioridade {
         System.out.println("]");
     }
 
-    public void printToString() {
-        // print made to fit the beecrowd standards >:(
-        if (!isEmpty()) {
-            NodeP temp = this.first;
-            for (int i = 0; i < indices; i++) {
-                System.out.print(temp.data + ", ");
-                temp = temp.next;
-            }
-            System.out.println(temp.data);
-        }
-    }
-
     public char get(int pos) {
         NodeP temp = this.first;
         for (int i = 0; i < pos; i++) {
             temp = temp.next;
         }
         return temp.data;
+    }
+
+    public NodeP getTree() {
+        return this.first;
     }
 
     public int getPriority(int pos) {
@@ -140,6 +162,18 @@ public class FilaPrioridade {
 
     public void clear() {
         newObject();
+    }
+
+    // Huffman Tree
+    public void huffmanizer() {
+        while (size() > 1) {
+            NodeP nullNode = new NodeP('\0', first.priority + first.next.priority);
+            nullNode.left = first;
+            nullNode.right= first.next;
+            dequeue();
+            dequeue();
+            enqueue(nullNode);
+        }
     }
 
     // Utils
