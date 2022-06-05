@@ -77,10 +77,8 @@ public class Compactador {
 		BinaryTree bt = new BinaryTree();
 		filaFrequencia.huffmanizer();
 		filaFrequencia.print();
-		bt.root = filaFrequencia.getTree();
+		bt.setRoot(filaFrequencia.getTree());
 		bt.printPreOrder();
-
-
 
 //        int i = 233;
 //        char a = (char) 115;

@@ -14,6 +14,10 @@ public class BinaryTree
     }
 
     // Methods:
+    public void setRoot(NodeP node) {
+        this.root = node;
+    }
+
     public void printPreOrder() {
         if (this.root != null) {
             subPRE_ORDER(this.root);
