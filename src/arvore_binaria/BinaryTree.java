@@ -9,20 +9,18 @@ public class BinaryTree
 {
     // Atribbutes:
     public NodeP root;
-    public NodeD[] codeArray;
+    public FilaDinamica dictionary;
+    public String code;
 
     // Constructor:
     public BinaryTree() {
         this.root = null;
+        this.code = null;
     }
 
     // Methods:
     public void setRoot(NodeP node) {
         this.root = node;
-    }
-
-    public void setCodeArrayLen(int size) {
-        codeArray = new NodeD[size];
     }
 
     public void printPreOrder() {
@@ -34,16 +32,27 @@ public class BinaryTree
 
     // TODO: implementar o dicionário
     public void subPRE_ORDER(NodeP refNode) {
-        int index = 0;
         System.out.print(refNode.data + " ");
 
         if (refNode.left != null) {
-            codeArray[index].addCodeNumber("0");
+            if (refNode.left.data == '\0') {
+                code += "0";
+            }
+            else {
+                code += "0";
+                dictionary.enqueue(refNode.data, code);
+            }
             subPRE_ORDER(refNode.left);
         }
 
         if (refNode.right != null) {
-            codeArray[index].addCodeNumber("1");
+            if (refNode.right.data == '\0') {
+                code += "1";
+            }
+            else {
+                code += "1";
+                dictionary.enqueue(refNode.data, code);
+            }
             subPRE_ORDER(refNode.right);
         }
     }

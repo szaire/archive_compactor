@@ -13,10 +13,7 @@ public class NodeD
 
     public NodeD(char data) {
         this.data = data;
+        this.code = "";
         this.next = null;
-    }
-
-    public void addCodeNumber(String code) {
-        this.code += code;
     }
 }

@@ -20,15 +20,14 @@ public class FilaDinamica
     // methods
     public void enqueue(char obj, String code) {
         NodeD newData = new NodeD(obj);
+        newData.code = code;
 
         if (first == null) {
             this.first = this.last = newData;
-            newData.addCodeNumber(code);
         }
         else {
             this.last.next = newData;
             this.last = newData;
-            newData.addCodeNumber(code);
         }
         increasePositionRef();
     }

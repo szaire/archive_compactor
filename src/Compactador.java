@@ -77,7 +77,6 @@ public class Compactador {
 		// TODO: pedir ajuda prof
 		// Criando a lista de camada de tradução
 		BinaryTree huffmanTree = new BinaryTree();
-		huffmanTree.setCodeArrayLen(filaFrequencia.size());
 
 		// Transformar fila de prioridade em Árvore Binária:
 		filaFrequencia.huffmanizer();
