@@ -74,7 +74,6 @@ public class Compactador {
 		filaFrequencia.print();
 
 		// fase 3:
-		// TODO: pedir ajuda prof
 		// Criando a lista de camada de tradução
 		ArvoreBinaria huffmanTree = new ArvoreBinaria();
 
