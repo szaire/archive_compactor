@@ -48,16 +48,16 @@ public class FilaDinamica
     }
 
     public void print() {
-        System.out.print("[");
+        System.out.print("{");
         if (!isEmpty()) {
             NodeD temp = this.first;
             for (int i = 0; i < indices; i++) {
-                System.out.print(temp.data + ", ");
+                System.out.print("'" + temp.data + "'" + " : " + temp.code + ", ");
                 temp = temp.next;
             }
-            System.out.print(temp.data);
+            System.out.print("'" + temp.data + "'"  + " : " + temp.code);
         }
-        System.out.println("]");
+        System.out.println("}");
     }
 
     public void printToString() {

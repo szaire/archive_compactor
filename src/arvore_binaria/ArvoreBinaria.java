@@ -1,21 +1,21 @@
 package arvore_binaria;
 
-import dictionary.NodeD;
 import fila.FilaDinamica;
 import node.NodeP;
 
 // Type: search
-public class BinaryTree
+public class ArvoreBinaria
 {
     // Atribbutes:
     public NodeP root;
-    public FilaDinamica dictionary;
     public String code;
+    public FilaDinamica dictionary;
 
     // Constructor:
-    public BinaryTree() {
+    public ArvoreBinaria() {
         this.root = null;
-        this.code = null;
+        this.code = "";
+        dictionary = new FilaDinamica();
     }
 
     // Methods:
@@ -35,25 +35,20 @@ public class BinaryTree
         System.out.print(refNode.data + " ");
 
         if (refNode.left != null) {
-            if (refNode.left.data == '\0') {
-                code += "0";
-            }
-            else {
-                code += "0";
-                dictionary.enqueue(refNode.data, code);
-            }
+            code += "0";
             subPRE_ORDER(refNode.left);
         }
 
         if (refNode.right != null) {
-            if (refNode.right.data == '\0') {
-                code += "1";
-            }
-            else {
-                code += "1";
-                dictionary.enqueue(refNode.data, code);
-            }
+            code += "1";
             subPRE_ORDER(refNode.right);
+        }
+
+        if (refNode.data != '\0') {
+            this.dictionary.enqueue(refNode.data, code);
+        }
+        if (code.length() > 0) {
+            this.code = code.substring(0, code.length()-1);
         }
     }
 

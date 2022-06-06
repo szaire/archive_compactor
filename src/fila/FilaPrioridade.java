@@ -25,23 +25,25 @@ public class FilaPrioridade {
         }
         else {
             // Se o novo dado ter prioridade mais alta
-            if (newData.priority <= this.first.priority) {
+            if (newData.priority < this.first.priority) {
                 newData.next = this.first;
                 this.first = newData;
             }
             // Se o novo dado ter prioridade mais baixa
-            else if (newData.priority > this.last.priority) {
+            else if (newData.priority >= this.last.priority) {
                 this.last.next = newData;
                 this.last = newData;
             }
             // Se o novo dado ter prioridade intermediária
             else {
-                NodeP temp = this.first;
-                while (newData.priority > temp.next.priority) {
-                    temp = temp.next;
+                NodeP temp1 = this.first;
+                NodeP temp2 = this.first.next;
+                while (newData.priority >= temp2.priority) {
+                    temp1 = temp1.next;
+                    temp2 = temp2.next;
                 }
-                newData.next = temp.next;
-                temp.next = newData;
+                newData.next = temp2;
+                temp1.next = newData;
             }
         }
         increasePositionRef();
@@ -52,24 +54,26 @@ public class FilaPrioridade {
             this.first = this.last = newNode;
         }
         else {
-            // Se o novo dado ter prioridade mais baixa
-            if (newNode.priority <= this.first.priority) {
+            // Se o novo dado ter prioridade mais alta
+            if (newNode.priority < this.first.priority) {
                 newNode.next = this.first;
                 this.first = newNode;
             }
             // Se o novo dado ter prioridade mais baixa
-            else if (newNode.priority > this.last.priority) {
+            else if (newNode.priority >= this.last.priority) {
                 this.last.next = newNode;
                 this.last = newNode;
             }
             // Se o novo dado ter prioridade intermediária
             else {
-                NodeP temp = this.first;
-                while (newNode.priority > temp.next.priority) {
-                    temp = temp.next;
+                NodeP temp1 = this.first;
+                NodeP temp2 = this.first.next;
+                while (newNode.priority >= temp2.priority) {
+                    temp1 = temp1.next;
+                    temp2 = temp2.next;
                 }
-                newNode.next = temp.next;
-                temp.next = newNode;
+                newNode.next = temp2;
+                temp1.next = newNode;
             }
         }
         increasePositionRef();
