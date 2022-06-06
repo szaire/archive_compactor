@@ -1,6 +1,6 @@
-package fila_prioridade;
+package fila;
 
-import org.w3c.dom.Node;
+import node.NodeP;
 
 public class FilaPrioridade {
     // attributes

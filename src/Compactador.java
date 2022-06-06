@@ -1,5 +1,5 @@
 import arvore_binaria.BinaryTree;
-import fila_prioridade.FilaPrioridade;
+import fila.FilaPrioridade;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -74,15 +74,18 @@ public class Compactador {
 		filaFrequencia.print();
 
 		// fase 3:
-		BinaryTree bt = new BinaryTree();
+		// TODO: pedir ajuda prof
+		// Criando a lista de camada de tradução
+		BinaryTree huffmanTree = new BinaryTree();
+		huffmanTree.setCodeArrayLen(filaFrequencia.size());
+
+		// Transformar fila de prioridade em Árvore Binária:
 		filaFrequencia.huffmanizer();
 		filaFrequencia.print();
-		bt.setRoot(filaFrequencia.getTree());
-		bt.printPreOrder();
 
-//        int i = 233;
-//        char a = (char) 115;
-//        System.out.println(a);
+		// Guardar a raiz da lista em uma root de uma Classe de Árvore Binária
+		huffmanTree.setRoot(filaFrequencia.getTree());
+		huffmanTree.printPreOrder();
 
 	}
 }

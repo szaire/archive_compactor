@@ -1,4 +1,4 @@
-package fila_prioridade;
+package node;
 
 public class NodeP
 {
