@@ -52,10 +52,10 @@ public class FilaDinamica
         if (!isEmpty()) {
             NodeD temp = this.first;
             for (int i = 0; i < indices; i++) {
-                System.out.print("'" + temp.data + "'" + " : " + temp.code + ", ");
+                System.out.print("'" + temp.data + "'" + ":" + temp.code + ", ");
                 temp = temp.next;
             }
-            System.out.print("'" + temp.data + "'"  + " : " + temp.code);
+            System.out.print("'" + temp.data + "'"  + ":" + temp.code);
         }
         System.out.println("}");
     }
@@ -72,12 +72,23 @@ public class FilaDinamica
         }
     }
 
-    public char get(int pos) {
+    public NodeD get(int pos) {
         NodeD temp = this.first;
         for (int i = 0; i < pos; i++) {
             temp = temp.next;
         }
-        return temp.data;
+        return temp;
+    }
+
+    public String searchCode(char auxChar) {
+        NodeD temp = this.first;
+        for (int i = 0; i < size(); i++) {
+            if (auxChar == temp.data) {
+                return temp.code;
+            }
+            temp = temp.next;
+        }
+        return null;
     }
 
     public void remove(char obj) {

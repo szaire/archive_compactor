@@ -1,9 +1,7 @@
 import arvore_binaria.ArvoreBinaria;
 import fila.FilaPrioridade;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.Scanner;
@@ -45,7 +43,7 @@ public class Compactador {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// fase 1:
 		Locale.setDefault(new Locale("pt", "BR"));
 		DecimalFormat df = new DecimalFormat("###,####,##");
@@ -74,17 +72,38 @@ public class Compactador {
 		filaFrequencia.print();
 
 		// fase 3:
-		// Criando a lista de camada de tradução
-		ArvoreBinaria huffmanTree = new ArvoreBinaria();
-
-		// Transformar fila de prioridade em Árvore Binária:
+		// Transformando fila de prioridade em Árvore Binária:
 		filaFrequencia.huffmanizer();
 		filaFrequencia.print();
 
-		// Guardar a raiz da lista em uma root de uma Classe de Árvore Binária
+		// Guardando a raiz da lista na root de um objeto de Árvore Binária criado
+		ArvoreBinaria huffmanTree = new ArvoreBinaria();
 		huffmanTree.setRoot(filaFrequencia.getTree());
+
+		// Gerando o dicionário da árvore de huffman
 		huffmanTree.printPreOrder();
 		huffmanTree.dictionary.print();
 
+		// Compactar a árvore de huffman em binário
+		huffmanTree.treeCompactor();
+		System.out.println("Arvore de Huffman compactada: " + huffmanTree.getCompactedTree());
+
+		// Tradutor do arquivo de texto "output.txt" para binário
+		File output = new File("output.txt");
+		FileInputStream fis = new FileInputStream(output);
+		int auxChar;
+		while ((auxChar=fis.read()) != -1) {
+			huffmanTree.binaryTranslator(auxChar);
+		}
+		System.out.println("Texto em binario: " + huffmanTree.getOutputText());
+
+		// TODO: Criar um arquivo que irá receber os seguintes métodos nas suas duas primeiras linhas
+		huffmanTree.getCompactedTree();
+		huffmanTree.getOutputText();
+
+		// trocar seguintes arquivos em casa:
+		// Compactador
+		// Arvore Binaria
+		// FilaDinamica
 	}
 }

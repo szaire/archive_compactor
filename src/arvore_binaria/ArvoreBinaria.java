@@ -1,5 +1,6 @@
 package arvore_binaria;
 
+import dictionary.NodeD;
 import fila.FilaDinamica;
 import node.NodeP;
 
@@ -9,13 +10,17 @@ public class ArvoreBinaria
     // Atribbutes:
     public NodeP root;
     public String code;
+    public String compactedTree;
+    public String outputText;
     public FilaDinamica dictionary;
 
     // Constructor:
     public ArvoreBinaria() {
         this.root = null;
         this.code = "";
-        dictionary = new FilaDinamica();
+        this.compactedTree = "";
+        this.outputText = "";
+        this.dictionary = new FilaDinamica();
     }
 
     // Methods:
@@ -55,6 +60,47 @@ public class ArvoreBinaria
             // irá tirar o último digito da string code para que se possa colocar outros futuramente
             this.code = code.substring(0, code.length()-1);
         }
+    }
+
+    // compactador da Árvore Binária
+    // TODO: Adicionar na Classe da Árvore Binária em Casa
+    public void treeCompactor() {
+        if (!isEmpty()) {
+            subTREE_COMPACTOR(this.root);
+        }
+    }
+    private void subTREE_COMPACTOR(NodeP refNode) {
+        if (refNode.data == '\0') {
+            compactedTree += "0";
+
+            if (refNode.left != null) {
+                subTREE_COMPACTOR(refNode.left);
+            }
+            if (refNode.right != null) {
+                subTREE_COMPACTOR(refNode.right);
+            }
+        }
+        else {
+            compactedTree += "1";
+            int binary = refNode.data;
+            compactedTree += Integer.toBinaryString(binary);
+        }
+    }
+    public String getCompactedTree() {
+        return compactedTree;
+    }
+
+    // Tradutor do texto para binário:
+    public void binaryTranslator(int auxChar) {
+        if (!isEmpty()) {
+           outputText += dictionaryCode((char) auxChar);
+        }
+    }
+    public String dictionaryCode(char auxChar) {
+        return dictionary.searchCode(auxChar);
+    }
+    public String getOutputText() {
+        return outputText;
     }
 
     // Utils:
