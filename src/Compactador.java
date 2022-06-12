@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 public class Compactador {
 
+	// TODO: CRIAR O MÉTODO PARA CHECAR SE O ARQUIVO.TXT É COMPACTÁVEL
+
 	public static StringBuilder readFile(String FileName) { // Ler um arquivo.txt e retornar uma String com as linhas do
 															// arquivo concatenadas
 		try {
@@ -20,6 +22,17 @@ public class Compactador {
 			return result;
 		} catch (IOException e) {
 			throw new RuntimeException("Arquivo nao encontrado");
+		}
+	}
+
+	public static void writeFile(String fileName,String line1,String line2) { // Escrever o arquivo compactado
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+			writer.write(line1);
+			writer.write("\n"+line2);
+			writer.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
