@@ -15,4 +15,10 @@ public class NodeP
         this.priority = level;
         this.next = null;
     }
+
+    public NodeP(char obj) {
+        this.data = obj;
+        this.priority = 0;
+        this.next = null;
+    }
 }
