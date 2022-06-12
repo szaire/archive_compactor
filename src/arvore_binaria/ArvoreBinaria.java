@@ -1,6 +1,5 @@
 package arvore_binaria;
 
-import dictionary.NodeD;
 import fila.FilaDinamica;
 import node.NodeP;
 
@@ -26,6 +25,36 @@ public class ArvoreBinaria
     // Methods:
     public void setRoot(NodeP node) {
         this.root = node;
+    }
+
+    public void add(char character) {
+        if (isEmpty()) {
+            this.root = new NodeP(character);
+        }
+        else {
+            subADD(character, this.root);
+        }
+    }
+
+    public void subADD(char character, NodeP refNode) {
+        // if the value is smaller than the current node, then go to left side of the tree
+        if (character < refNode.data) {
+            if (refNode.left == null) {
+                refNode.left = new NodeP(character);
+            }
+            else {
+                subADD(character, refNode.left);
+            }
+        }
+        // if the value is bigger than the current node, then go to right side of the tree
+        else if (character > refNode.data){
+            if (refNode.right == null) {
+                refNode.right = new NodeP(character);
+            }
+            else {
+                subADD(character, refNode.right);
+            }
+        }
     }
 
     public void printPreOrder() {
