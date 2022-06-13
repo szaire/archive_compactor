@@ -11,9 +11,14 @@ public class Main {
         Scanner in = new Scanner(System.in);
         String FileName = in.nextLine(); // Digo o nome do arquivo
 
-        Compactador compac = new Compactador();
-        compac.execute(FileName);
+        Compactador compactador = new Compactador();
+        compactador.execute(FileName);
 
         // Descompactador
+        String FileNameCompressed = in.nextLine(); // Digo o nome do arquivo compactado
+
+        Descompactor descompactador = new Descompactor();
+        descompactador.execute(FileNameCompressed);
+
     }
 }
