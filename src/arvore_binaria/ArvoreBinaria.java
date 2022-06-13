@@ -27,28 +27,12 @@ public class ArvoreBinaria
         this.root = node;
     }
 
-    public void createBinaryTree(String binaryTreeInstruction) {
-        char[] charArr = binaryTreeInstruction.toCharArray();
-
-        for (int i = 0; i < charArr.length;) {
-            if (charArr[i] == '0') {
-                addLeftChild();
-                i++;
-            }
-            else if (charArr[i] == '1') {
-                // lê oito caracteres
-                String charArrAux = "";
-                for (int j = i+1; j <= i+8; j++) {
-                    charArrAux += Character.toString(charArr[i]);
-                }
-                char charAux = (char) Integer.parseInt(charArrAux, 2);
-                i+=8;
-            }
-        }
+    public void setLeftChild(NodeP refNode, char character) {
+        refNode.left.data = character;
     }
 
-    public void addLeftChild() {
-
+    public void setRightChild(NodeP refNode, char character) {
+        refNode.right.data = character;
     }
 
     public void printPreOrder() {
