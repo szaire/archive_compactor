@@ -1,16 +1,17 @@
 import arvore_binaria.ArvoreBinaria;
+import node.NodeP;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Descompactor
+public class Descompactador
 {
     private ArvoreBinaria huffmanTree;
     private String[] lines;
     private int indexCounter;
 
-    public Descompactor() {
+    public Descompactador() {
         this.huffmanTree = new ArvoreBinaria();
         this.indexCounter = 0;
     }
@@ -31,11 +32,10 @@ public class Descompactor
     }
 
     private void descompactarArvore() {
-        String line1 = this.lines[1];
+        String line1 = this.lines[0];
+        huffmanTree.setRoot(new NodeP('\0'));
 
-        while (indexCounter < line1.length()) {
 
-        }
     }
 
     public void execute(String FileNameCompressed) {
