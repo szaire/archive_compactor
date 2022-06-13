@@ -2,15 +2,13 @@ import arvore_binaria.ArvoreBinaria;
 import fila.FilaPrioridade;
 
 import java.io.*;
-import java.text.DecimalFormat;
-import java.util.Locale;
-import java.util.Scanner;
 
 public class Compactador {
 	private int[] dados;
 	private FilaPrioridade filaFrequencia;
 	private ArvoreBinaria huffmanTree;
-	// met
+	private String linha1;
+	private String linha2;
 
 	public static StringBuilder readFile(String FileName) { // Ler um arquivo.txt e retornar uma String com as linhas do
 															// arquivo concatenadas
@@ -27,9 +25,9 @@ public class Compactador {
 		}
 	}
 
-	public static void writeFile(String fileName,String line1,String line2) { // Escrever o arquivo compactado
+	public static void writeFile(String fileName, String line1, String line2) { // Escrever o arquivo compactado
 		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(fileName+".cringe.txt"));
 			writer.write(line1+"\n");
 			writer.write(line2);
 			writer.close();
@@ -58,14 +56,9 @@ public class Compactador {
 		}
 	}
 
-	public void contadorDeFrequencia() throws IOException {
-		Locale.setDefault(new Locale("pt", "BR"));
-		DecimalFormat df = new DecimalFormat("###,####,##");
-		Scanner in = new Scanner(System.in);
-		String FileName = in.nextLine(); // Digo o nome do arquivo
-
+	public void frequencia(String FileName) throws IOException {
 		String line = String.valueOf(readFile(FileName)); // Leio o arquivo e retorno uma string que concatena todas as
-		// linhas do arquivo
+														  // linhas do arquivo
 
 		this.dados = countFrequency(line); // Conto a frequencia dos caracteres na string e coloco tudo num array
 		printFrequency(this.dados);
@@ -113,16 +106,19 @@ public class Compactador {
 			huffmanTree.binaryTranslator(auxChar);
 		}
 		System.out.println("Texto em binario: " + huffmanTree.getOutputText());
+
+		this.linha1 = huffmanTree.getCompactedTree();
+		this.linha2 = huffmanTree.getOutputText();
 	}
 
 	public ArvoreBinaria getHuffmanTree() {
 		return huffmanTree;
 	}
 
-	public void execute() throws IOException {
-		// fase 1:
-		contadorDeFrequencia();
-		filaDePrioridade();
-		criarHuffmanTree();
+	public void execute(String FileName) throws IOException {
+		/* fase 1: */ frequencia(FileName);
+		/* fase 2: */ filaDePrioridade();
+		/* fase 3: */ criarHuffmanTree();
+		/* fase 4: */ writeFile(FileName, linha1, linha2);
 	}
 }
