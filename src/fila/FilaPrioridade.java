@@ -99,7 +99,7 @@ public class FilaPrioridade {
         if (!isEmpty()) {
             NodeP temp = this.first;
             for (int i = 0; i < indices; i++) {
-                System.out.print("('" + temp.data + "', " + temp.priority + "), ");
+                System.out.println("('" + temp.data + "', " + temp.priority + "), ");
                 temp = temp.next;
             }
             System.out.print("('" + temp.data + "', " + temp.priority + ")");

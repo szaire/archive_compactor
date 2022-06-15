@@ -42,6 +42,7 @@ public class ArvoreBinaria
         }
     }
 
+    // ok!
     public void subPRE_ORDER(NodeP refNode) {
         System.out.print(refNode.data + " ");
 
@@ -89,8 +90,8 @@ public class ArvoreBinaria
         }
         else {
             compactedTree += "1";
-            int binary = refNode.data;
-            compactedTree += Integer.toBinaryString(binary);
+            String binary = String.format("%8s", Integer.toBinaryString(refNode.data)).replace(' ', '0');
+            compactedTree += binary;
         }
     }
     public String getCompactedTree() {

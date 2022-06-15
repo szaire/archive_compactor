@@ -2,6 +2,7 @@ import arvore_binaria.ArvoreBinaria;
 import fila.FilaPrioridade;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class Compactador {
 	private int[] dados;
@@ -10,16 +11,16 @@ public class Compactador {
 	private String linha1;
 	private String linha2;
 
-	public static StringBuilder readFile(String FileName) { // Ler um arquivo.txt e retornar uma String com as linhas do
-															// arquivo concatenadas
+	public void readFile(String FileName) {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(FileName + ".txt"));
-			String line;
-			StringBuilder result = new StringBuilder();
-			while ((line = reader.readLine()) != null) {
-				result.append(line);
+			int[] result = new int[256];
+			int index = reader.read();
+			while (index != -1) {
+				result[index] ++;
+				index = reader.read();
 			}
-			return result;
+			this.dados = result;
 		} catch (IOException e) {
 			throw new RuntimeException("Arquivo nao encontrado");
 		}
@@ -36,16 +37,7 @@ public class Compactador {
 		}
 	}
 
-	public static int[] countFrequency(String line) { // contar a frequência de caracteres numa String line
-		int[] counting = new int[255];
 
-		for (int i = 0; i < line.length(); i++) {
-			int index = (int) line.charAt(i);
-			counting[index]++;
-		}
-
-		return counting;
-	}
 
 	public static void printFrequency(int[] data) { // printar a frequência que está no array de 256 caracteres
 		for (int i = 0; i < data.length; i++) {
@@ -54,14 +46,6 @@ public class Compactador {
 				System.out.println(n + " - " + data[i]);
 			}
 		}
-	}
-
-	public void frequencia(String FileName) throws IOException {
-		String line = String.valueOf(readFile(FileName)); // Leio o arquivo e retorno uma string que concatena todas as
-														  // linhas do arquivo
-
-		this.dados = countFrequency(line); // Conto a frequencia dos caracteres na string e coloco tudo num array
-		printFrequency(this.dados);
 	}
 
 	public void filaDePrioridade() throws IOException {
@@ -80,7 +64,7 @@ public class Compactador {
 		filaFrequencia.print();
 	}
 	
-	public void criarHuffmanTree() throws IOException {
+	public void criarHuffmanTree(String FileName) throws IOException {
 		// fase 3:
 		// Transformando fila de prioridade em Árvore Binária:
 		filaFrequencia.huffmanizer();
@@ -98,11 +82,10 @@ public class Compactador {
 		huffmanTree.treeCompactor();
 		System.out.println("Arvore de Huffman compactada: " + huffmanTree.getCompactedTree());
 
-		// Tradutor do arquivo de texto "output.txt" para binário
-		File output = new File("output.txt");
-		FileInputStream fis = new FileInputStream(output);
+		// Tradutor do arquivo de texto ".txt" para binário
+		BufferedReader reader = new BufferedReader(new FileReader(FileName + ".txt"));
 		int auxChar;
-		while ((auxChar=fis.read()) != -1) {
+		while ((auxChar=reader.read()) != -1) {
 			huffmanTree.binaryTranslator(auxChar);
 		}
 		System.out.println("Texto em binario: " + huffmanTree.getOutputText());
@@ -116,9 +99,9 @@ public class Compactador {
 	}
 
 	public void execute(String FileName) throws IOException {
-		/* fase 1: */ frequencia(FileName);
+		/* fase 1: */ readFile(FileName);
 		/* fase 2: */ filaDePrioridade();
-		/* fase 3: */ criarHuffmanTree();
+		/* fase 3: */ criarHuffmanTree(FileName);
 		/* fase 4: */ writeFile(FileName, linha1, linha2);
 	}
 }
