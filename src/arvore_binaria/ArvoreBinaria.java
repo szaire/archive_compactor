@@ -8,6 +8,7 @@ public class ArvoreBinaria
 {
     // Atribbutes:
     public NodeP root;
+    public NodeP refRoot;
     public String code;
     public String compactedTree;
     public String outputText;
@@ -25,14 +26,37 @@ public class ArvoreBinaria
     // Methods:
     public void setRoot(NodeP node) {
         this.root = node;
+        this.refRoot = root;
+        this.refRoot.father = root;
     }
 
-    public void setLeftChild(NodeP refNode, char character) {
-        refNode.left.data = character;
+    public void setRefRoot(NodeP node) {
+        this.refRoot.father = this.refRoot;
+        this.refRoot = node;
     }
 
-    public void setRightChild(NodeP refNode, char character) {
-        refNode.right.data = character;
+    public NodeP getRefRoot() {
+        return refRoot;
+    }
+
+    public void growUp() {
+        this.refRoot = this.refRoot.father;
+    }
+
+    public void addToRefNode_LEFT(NodeP newNodeCharacter) {
+        this.refRoot.left = newNodeCharacter;
+    }
+
+    public void addToRefNode_RIGHT(NodeP newNodeCharacter) {
+        this.refRoot.right = newNodeCharacter;
+    }
+
+    public void setLeftChild(NodeP refNode, NodeP newNode) {
+        refNode.left = newNode;
+    }
+
+    public void setRightChild(NodeP refNode, NodeP newNode) {
+        refNode.right = newNode;
     }
 
     public void printPreOrder() {

@@ -1,5 +1,9 @@
 import arvore_binaria.ArvoreBinaria;
+<<<<<<< HEAD:src/Descompactor.java
 import node.NodeCrazy;
+=======
+import node.NodeP;
+>>>>>>> 1bd94c98a6e9c82c6e2fe435d94a151cf76ba281:src/Descompactador.java
 
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -7,13 +11,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Descompactor
+public class Descompactador
 {
     private NodeCrazy tree;
     private String[] lines;
     private int indexCounter;
 
+<<<<<<< HEAD:src/Descompactor.java
     public Descompactor() {
+=======
+    public Descompactador() {
+        this.huffmanTree = new ArvoreBinaria();
+>>>>>>> 1bd94c98a6e9c82c6e2fe435d94a151cf76ba281:src/Descompactador.java
         this.indexCounter = 0;
     }
 
@@ -32,6 +41,7 @@ public class Descompactor
         }
     }
 
+<<<<<<< HEAD:src/Descompactor.java
     public int convertBinaryToDecimal(String number) {
         double convertedDouble = 0;
 
@@ -79,6 +89,13 @@ public class Descompactor
         if (tree.getRight() != null){
             printTree(tree.getRight());
         }
+=======
+    private void descompactarArvore() {
+        String line1 = this.lines[0];
+        huffmanTree.setRoot(new NodeP('\0'));
+
+
+>>>>>>> 1bd94c98a6e9c82c6e2fe435d94a151cf76ba281:src/Descompactador.java
     }
 
     public String readTree () {
