@@ -95,7 +95,6 @@ public class ArvoreBinaria
     }
 
     // compactador da Árvore Binária
-    // TODO: Adicionar na Classe da Árvore Binária em Casa
     public void treeCompactor() {
         if (!isEmpty()) {
             subTREE_COMPACTOR(this.root);
